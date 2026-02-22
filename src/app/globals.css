@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Geist:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 2%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 4%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 4%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 160 84% 39%;
+    --primary-foreground: 240 10% 2%;
+    --secondary: 43 96% 56%;
+    --secondary-foreground: 240 10% 2%;
+    --muted: 240 4% 10%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 160 84% 39%;
+    --accent-foreground: 240 10% 2%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 4% 12%;
+    --input: 240 4% 12%;
+    --ring: 160 84% 39%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-[#050505] text-zinc-50 antialiased;
+    font-family: 'Outfit', 'Geist', system-ui, sans-serif;
+    line-height: 1.6;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-emerald-500/50 ring-offset-2 ring-offset-black;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .premium-glass {
+    @apply backdrop-blur-xl bg-black/40 border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.4)];
+  }
+
+  .premium-card {
+    @apply relative overflow-hidden bg-[#0a0a0a] border border-white/5 hover:border-emerald-500/30 transition-all duration-500;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-white via-zinc-200 to-zinc-500;
+  }
+
+  .text-gradient-emerald {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400;
+  }
+
+  .gradient-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.03) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite linear;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+}
+
