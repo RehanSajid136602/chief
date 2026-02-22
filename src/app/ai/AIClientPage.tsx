@@ -10,8 +10,10 @@ import { Container } from "@/components/ui/Container";
 export function AIClientPage() {
   const [results, setResults] = useState<MatchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const handleFindRecipes = (ingredients: string[]) => {
+    setHasSearched(true);
     setIsLoading(true);
     setTimeout(() => {
       const matched = matchRecipes(ingredients);
@@ -21,32 +23,48 @@ export function AIClientPage() {
   };
 
   return (
-    <main className="min-h-screen pt-24 pb-12">
-      <Container className="max-w-4xl">
-        <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-zinc-100 mb-4">
+    <main className="min-h-screen pt-24 pb-14">
+      <Container className="max-w-5xl">
+        <div className="mb-10 md:mb-12">
+          <p className="text-xs uppercase tracking-[0.12em] font-semibold text-zinc-500 mb-2">
+            Ingredient Matcher
+          </p>
+          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-zinc-100 mb-3">
             AI Ingredient Matcher
           </h1>
-          <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-            Tell us what ingredients you have, and we&apos;ll find recipes you can
-            make. Our smart matching algorithm finds the best matches based on
-            what you have available.
+          <p className="text-base md:text-lg leading-7 text-zinc-400 max-w-3xl">
+            Add ingredients from your pantry and get the best recipe matches. This flow is optimized for quick decisions, not noisy prompts.
           </p>
         </div>
 
-        <div className="max-w-xl mx-auto mb-12">
-          <div className="bg-zinc-900/80 backdrop-blur-sm border border-white/10 rounded-lg p-6">
-            <h2 className="text-lg font-semibold text-zinc-100 mb-4">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+          <div className="surface-panel rounded-2xl p-5 md:p-6 h-fit">
+            <h2 className="text-lg font-semibold text-zinc-100 mb-2">
               What ingredients do you have?
             </h2>
+            <p className="text-sm leading-6 text-zinc-400 mb-4">
+              Press Enter or comma to add each ingredient. Keep it simple: “chicken”, “rice”, “garlic”, “tomato”.
+            </p>
             <IngredientInput
               onFindRecipes={handleFindRecipes}
               isLoading={isLoading}
             />
           </div>
-        </div>
 
-        {results.length > 0 && <MatchResults results={results} />}
+          <div className="space-y-4">
+            {!hasSearched && (
+              <div className="surface-subtle rounded-2xl p-5">
+                <p className="text-sm font-semibold text-zinc-100 mb-1">
+                  Start with 3 to 5 ingredients
+                </p>
+                <p className="text-sm leading-6 text-zinc-400">
+                  The matcher works best when you add core ingredients first, then filter recipe options by time or calories on the home page if needed.
+                </p>
+              </div>
+            )}
+            {(hasSearched || results.length > 0) && <MatchResults results={results} />}
+          </div>
+        </div>
       </Container>
     </main>
   );

@@ -53,13 +53,13 @@ export function IngredientInput({ onFindRecipes, isLoading }: IngredientInputPro
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           placeholder="Enter ingredients (press Enter or comma to add)"
-          className="bg-white/5 border-white/10 text-zinc-100 placeholder:text-zinc-600"
+          className="h-11"
         />
         <Button
           type="button"
           onClick={addIngredient}
           variant="outline"
-          className="border-white/10 text-zinc-300 hover:bg-white/10"
+          className="h-11 px-4"
         >
           Add
         </Button>
@@ -80,7 +80,7 @@ export function IngredientInput({ onFindRecipes, isLoading }: IngredientInputPro
       <Button
         type="submit"
         disabled={ingredients.length === 0 || isLoading}
-        className="w-full bg-emerald-400 hover:bg-emerald-500 text-zinc-950 font-medium disabled:opacity-50"
+        className="w-full h-11 font-semibold"
       >
         {isLoading ? "Finding recipes..." : "Find Recipes"}
       </Button>

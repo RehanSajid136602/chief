@@ -81,14 +81,14 @@ export function AuthForm({ mode }: AuthFormProps) {
 
   return (
     <div className="space-y-6 max-w-sm mx-auto">
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-4">
         {mode === "signup" && (
           <div className="space-y-2">
-            <Label htmlFor="name" className="text-zinc-200 text-xs font-semibold uppercase tracking-wider ml-1">
+            <Label htmlFor="name" className="text-zinc-300 text-[0.7rem] font-semibold uppercase tracking-[0.1em] ml-1">
               Full Name
             </Label>
             <div className="relative group">
-              <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-emerald-400 transition-colors">
+              <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-zinc-200 transition-colors">
                 <User className="w-4 h-4" />
               </div>
               <Input
@@ -99,18 +99,18 @@ export function AuthForm({ mode }: AuthFormProps) {
                 placeholder="Chef Gordon"
                 required
                 minLength={2}
-                className="pl-11 h-12 bg-black/40 border-white/20 text-white placeholder:text-zinc-400 focus:border-emerald-500/50 focus:ring-emerald-500/20 transition-all rounded-xl"
+                className="pl-11 h-11"
               />
             </div>
           </div>
         )}
 
         <div className="space-y-2">
-          <Label htmlFor="email" className="text-zinc-200 text-xs font-semibold uppercase tracking-wider ml-1">
+          <Label htmlFor="email" className="text-zinc-300 text-[0.7rem] font-semibold uppercase tracking-[0.1em] ml-1">
             Email Address
           </Label>
           <div className="relative group">
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-emerald-400 transition-colors">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-zinc-200 transition-colors">
               <Mail className="w-4 h-4" />
             </div>
             <Input
@@ -120,17 +120,17 @@ export function AuthForm({ mode }: AuthFormProps) {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="chef@recipehub.com"
               required
-              className="pl-11 h-12 bg-black/40 border-white/20 text-white placeholder:text-zinc-400 focus:border-emerald-500/50 focus:ring-emerald-500/20 transition-all rounded-xl"
+              className="pl-11 h-11"
             />
           </div>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="password" className="text-zinc-200 text-xs font-semibold uppercase tracking-wider ml-1">
+          <Label htmlFor="password" className="text-zinc-300 text-[0.7rem] font-semibold uppercase tracking-[0.1em] ml-1">
             Password
           </Label>
           <div className="relative group">
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-emerald-400 transition-colors">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-zinc-200 transition-colors">
               <Lock className="w-4 h-4" />
             </div>
             <Input
@@ -141,14 +141,14 @@ export function AuthForm({ mode }: AuthFormProps) {
               placeholder="••••••••"
               required
               minLength={8}
-              className="pl-11 h-12 bg-black/40 border-white/20 text-white placeholder:text-zinc-400 focus:border-emerald-500/50 focus:ring-emerald-500/20 transition-all rounded-xl"
+              className="pl-11 h-11"
             />
           </div>
         </div>
 
         {error && (
-          <div className="text-sm text-red-400 bg-red-400/10 border border-red-400/20 p-4 rounded-xl flex items-center gap-3">
-            <div className="w-1.5 h-1.5 rounded-full bg-red-400 shadow-[0_0_8px_rgba(248,113,113,0.8)]" />
+          <div className="text-sm text-rose-300 bg-rose-400/10 border border-rose-400/20 p-3 rounded-xl flex items-center gap-2.5 leading-5">
+            <div className="w-1.5 h-1.5 rounded-full bg-rose-300" />
             {error}
           </div>
         )}
@@ -156,7 +156,7 @@ export function AuthForm({ mode }: AuthFormProps) {
         <Button
           type="submit"
           disabled={isLoading}
-          className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-black font-bold rounded-xl transition-all active:scale-[0.98] shadow-[0_0_20px_rgba(16,185,129,0.2)]"
+          className="w-full h-11 font-semibold"
         >
           {isLoading ? (
             <Loader2 className="w-5 h-5 animate-spin" />
@@ -170,10 +170,10 @@ export function AuthForm({ mode }: AuthFormProps) {
 
         <div className="relative py-2">
           <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-white/5" />
+            <span className="w-full border-t border-white/[0.08]" />
           </div>
-          <div className="relative flex justify-center text-[10px] uppercase font-bold tracking-widest text-zinc-500">
-            <span className="bg-[#0c0c0c] px-4 rounded-full border border-white/5">Or continue with</span>
+          <div className="relative flex justify-center text-[0.65rem] uppercase font-semibold tracking-[0.12em] text-zinc-500">
+            <span className="bg-[#121821] px-3 rounded-full border border-white/[0.06]">Or continue with</span>
           </div>
         </div>
 
@@ -181,7 +181,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           type="button"
           variant="outline"
           onClick={handleGoogleSignIn}
-          className="w-full h-12 bg-white border border-white/10 text-black hover:bg-zinc-100 transition-all rounded-xl font-semibold flex items-center justify-center gap-3"
+          className="w-full h-11 bg-white text-black hover:bg-zinc-100 rounded-xl font-medium flex items-center justify-center gap-2.5"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path
@@ -204,13 +204,13 @@ export function AuthForm({ mode }: AuthFormProps) {
           Continue with Google
         </Button>
 
-        <p className="text-center text-sm text-zinc-500">
+        <p className="text-left text-sm leading-6 text-zinc-500">
           {mode === "login" ? (
             <>
               New to RecipeHub?{" "}
               <Link
                 href="/auth/signup"
-                className="text-emerald-400 font-semibold hover:text-emerald-300 transition-colors"
+                className="text-zinc-200 font-medium hover:text-white transition-colors underline underline-offset-4 decoration-white/20"
               >
                 Create an account
               </Link>
@@ -220,7 +220,7 @@ export function AuthForm({ mode }: AuthFormProps) {
               Already have an account?{" "}
               <Link
                 href="/auth/login"
-                className="text-emerald-400 font-semibold hover:text-emerald-300 transition-colors"
+                className="text-zinc-200 font-medium hover:text-white transition-colors underline underline-offset-4 decoration-white/20"
               >
                 Sign in
               </Link>

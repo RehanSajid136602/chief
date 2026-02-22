@@ -17,10 +17,15 @@ export function MatchResults({ results }: MatchResultsProps) {
   }
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-xl font-semibold text-zinc-100">
-        Matching Recipes ({results.length})
-      </h2>
+    <div className="space-y-5">
+      <div className="surface-subtle rounded-2xl p-4">
+        <p className="text-xs uppercase tracking-[0.12em] font-semibold text-zinc-500 mb-1">
+          Results
+        </p>
+        <h2 className="text-lg font-semibold text-zinc-100">
+          {results.length} matching recipe{results.length === 1 ? "" : "s"}
+        </h2>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {results.map((result) => (
           <div key={result.recipe.id} className="relative">
@@ -30,8 +35,8 @@ export function MatchResults({ results }: MatchResultsProps) {
               showMatchBadge
             />
             {result.missingIngredients.length > 0 && (
-              <div className="mt-2 text-xs text-zinc-500">
-                <span className="font-medium text-zinc-400">Missing:</span>{" "}
+              <div className="mt-2 rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-2 text-xs leading-5 text-zinc-400">
+                <span className="font-medium text-zinc-200">Missing:</span>{" "}
                 {result.missingIngredients.join(", ")}
               </div>
             )}

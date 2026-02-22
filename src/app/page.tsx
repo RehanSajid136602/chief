@@ -35,10 +35,18 @@ export default async function Home() {
       <Navbar session={session} />
       <main className="min-h-screen pt-16">
         <Hero />
-        <Container className="py-12">
-          <h2 className="text-2xl font-bold text-zinc-100 mb-8">
-            All Recipes
-          </h2>
+        <Container className="py-10 md:py-12">
+          <div className="mb-8 md:mb-10 flex flex-col gap-2">
+            <p className="text-xs uppercase tracking-[0.12em] text-zinc-500 font-semibold">
+              Recipe Library
+            </p>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-zinc-100">
+              Browse recipes by time, calories, and cravings
+            </h2>
+            <p className="max-w-2xl text-sm md:text-base leading-6 text-zinc-400">
+              Start broad, then narrow quickly with tags and filters. The interface is optimized for scanning, not endless scrolling.
+            </p>
+          </div>
           <Suspense fallback={<RecipeGridSkeleton count={6} />}>
             <RecipeListClient 
               recipes={recipes} 
@@ -51,4 +59,3 @@ export default async function Home() {
     </>
   );
 }
-

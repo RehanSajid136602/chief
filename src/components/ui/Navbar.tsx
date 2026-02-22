@@ -40,23 +40,23 @@ export function Navbar({ session }: NavbarProps) {
   return (
     <header 
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled 
-          ? "bg-black/80 backdrop-blur-xl border-white/5 py-3 shadow-2xl" 
-          : "bg-transparent border-transparent py-5"
+          ? "bg-[#090b0f]/88 backdrop-blur-xl py-3 shadow-[0_10px_30px_rgba(0,0,0,0.28)] border-b border-white/[0.06]" 
+          : "bg-transparent py-5 border-b border-transparent"
       )}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <Link
             href="/"
-            className="group flex items-center gap-2"
+            className="group flex items-center gap-2.5"
           >
-            <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-              <span className="text-black font-black text-xs">RH</span>
+            <div className="w-8 h-8 rounded-lg border border-white/10 bg-white/[0.03] flex items-center justify-center transition-colors group-hover:border-emerald-400/40">
+              <span className="text-emerald-300 font-black text-xs">RH</span>
             </div>
-            <span className="text-xl font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors">
-              Recipe<span className="text-emerald-400">Hub</span>
+            <span className="text-[1.05rem] font-semibold tracking-tight text-zinc-100 group-hover:text-white transition-colors">
+              Recipe<span className="text-emerald-300">Hub</span>
             </span>
           </Link>
 
@@ -67,10 +67,10 @@ export function Navbar({ session }: NavbarProps) {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "text-sm font-medium transition-all hover:text-emerald-400 relative py-1",
+                    "text-sm font-medium transition-colors relative py-1",
                     pathname === link.href
-                      ? "text-emerald-400 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-emerald-400"
-                      : "text-zinc-400"
+                      ? "text-zinc-100 after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-px after:bg-emerald-300"
+                      : "text-zinc-400 hover:text-zinc-100"
                   )}
                 >
                   {link.label}
@@ -89,7 +89,7 @@ export function Navbar({ session }: NavbarProps) {
                   variant="ghost"
                   size="sm"
                   onClick={() => signOut()}
-                  className="text-zinc-300 hover:text-white hover:bg-white/5 rounded-full px-4"
+                  className="rounded-full px-4"
                 >
                   Sign out
                 </Button>
@@ -100,7 +100,7 @@ export function Navbar({ session }: NavbarProps) {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-zinc-300 hover:text-white hover:bg-white/5 rounded-full px-4"
+                    className="rounded-full px-4"
                   >
                     Login
                   </Button>
@@ -108,7 +108,7 @@ export function Navbar({ session }: NavbarProps) {
                 <Link href="/auth/signup">
                   <Button
                     size="sm"
-                    className="bg-emerald-500 hover:bg-emerald-400 text-black font-semibold rounded-full px-6 shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-300 hover:scale-105"
+                    className="rounded-full px-5 bg-emerald-400 hover:bg-emerald-300 text-black font-semibold shadow-[0_8px_22px_rgba(16,185,129,0.18)]"
                   >
                     Sign Up
                   </Button>
@@ -122,7 +122,7 @@ export function Navbar({ session }: NavbarProps) {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-zinc-300 hover:text-white"
+                className="text-zinc-300 hover:text-white rounded-full"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -141,7 +141,7 @@ export function Navbar({ session }: NavbarProps) {
                 </svg>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="bg-[#050505] border-white/10">
+            <SheetContent side="right" className="bg-[#0b0f14] border-white/10">
               <div className="flex flex-col space-y-6 mt-12">
                 {navLinks.map((link) => (
                   <Link
@@ -149,10 +149,10 @@ export function Navbar({ session }: NavbarProps) {
                     href={link.href}
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "text-2xl font-bold tracking-tight transition-colors hover:text-emerald-400",
+                      "text-2xl font-semibold tracking-tight transition-colors hover:text-white",
                       pathname === link.href
-                        ? "text-emerald-400"
-                        : "text-zinc-100"
+                        ? "text-white"
+                        : "text-zinc-300"
                     )}
                   >
                     {link.label}
@@ -167,7 +167,7 @@ export function Navbar({ session }: NavbarProps) {
                       <Button
                         variant="ghost"
                         onClick={() => signOut()}
-                        className="justify-start text-xl font-bold p-0 hover:bg-transparent hover:text-emerald-400"
+                        className="justify-start text-xl font-semibold p-0 hover:bg-transparent hover:text-white"
                       >
                         Sign out
                       </Button>
@@ -177,13 +177,13 @@ export function Navbar({ session }: NavbarProps) {
                       <Link href="/auth/login" onClick={() => setIsOpen(false)}>
                         <Button
                           variant="ghost"
-                          className="w-full justify-start text-xl font-bold p-0 hover:bg-transparent hover:text-emerald-400"
+                          className="w-full justify-start text-xl font-semibold p-0 hover:bg-transparent hover:text-white"
                         >
                           Login
                         </Button>
                       </Link>
                       <Link href="/auth/signup" onClick={() => setIsOpen(false)}>
-                        <Button className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-bold h-12 rounded-xl">
+                        <Button className="w-full h-12 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-black font-semibold">
                           Sign Up
                         </Button>
                       </Link>
@@ -198,4 +198,3 @@ export function Navbar({ session }: NavbarProps) {
     </header>
   );
 }
-

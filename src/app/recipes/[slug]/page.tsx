@@ -66,18 +66,18 @@ export default async function RecipePage({ params }: PageProps) {
       <Navbar session={session} />
       <main className="min-h-screen pb-20">
         {/* Editorial Hero Section */}
-        <section className="relative h-[60vh] md:h-[75vh] w-full overflow-hidden">
+        <section className="relative h-[56vh] md:h-[68vh] w-full overflow-hidden">
           <ImageGallery images={recipe.images} title={recipe.title} />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent z-10" />
           
           <div className="absolute bottom-0 left-0 right-0 z-20 pb-12">
             <Container className="max-w-5xl">
-              <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center justify-between mb-6">
                 <Link href="/#recipes">
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-zinc-400 hover:text-white bg-white/5 backdrop-blur-md rounded-full px-6"
+                      className="text-zinc-300 hover:text-white bg-white/[0.04] border border-white/[0.08] backdrop-blur-md rounded-full px-5"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -105,62 +105,62 @@ export default async function RecipePage({ params }: PageProps) {
               </div>
 
               
-              <div className="flex flex-wrap gap-3 mb-6">
+              <div className="flex flex-wrap gap-2 mb-4">
                 {recipe.tags.map((tag) => (
-                  <span key={tag} className="text-xs font-black uppercase tracking-[0.2em] px-3 py-1 bg-emerald-500 text-black rounded-sm">
+                  <span key={tag} className="text-[10px] font-semibold uppercase tracking-[0.1em] px-2.5 py-1 bg-white/[0.06] border border-white/[0.08] text-zinc-200 rounded-md">
                     {tag}
                   </span>
                 ))}
               </div>
               
-              <h1 className="text-4xl md:text-7xl font-black text-white leading-tight mb-4 tracking-tighter">
+              <h1 className="text-3xl md:text-6xl font-semibold text-white leading-tight mb-3 tracking-tight">
                 {recipe.title}
               </h1>
               
-              <p className="text-lg md:text-xl text-zinc-300 max-w-3xl leading-relaxed font-medium">
+              <p className="text-base md:text-lg text-zinc-300 max-w-3xl leading-7">
                 {recipe.description}
               </p>
             </Container>
           </div>
         </section>
 
-        <Container className="max-w-5xl mt-12">
-          <div className="grid lg:grid-cols-3 gap-12">
+        <Container className="max-w-5xl mt-10">
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
             {/* Left Column: Info & Ingredients */}
             <div className="lg:col-span-2 space-y-12">
-              <div className="grid sm:grid-cols-2 gap-12">
+              <div className="grid sm:grid-cols-2 gap-8 md:gap-10">
                 <section>
-                  <h2 className="text-2xl font-black text-white mb-8 flex items-center gap-3">
-                    <span className="w-8 h-1 bg-emerald-500 rounded-full" />
+                  <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-3">
+                    <span className="w-6 h-px bg-white/20 rounded-full" />
                     Ingredients
                   </h2>
                   <ul className="space-y-4">
                     {recipe.ingredients.map((ingredient, index) => (
                       <li
                         key={index}
-                        className="flex items-start text-zinc-300 pb-4 border-b border-white/5 last:border-0 group cursor-default"
+                        className="flex items-start text-zinc-300 pb-3 border-b border-white/[0.05] last:border-0 group cursor-default"
                       >
-                        <span className="mr-4 w-5 h-5 rounded-full border border-emerald-500/30 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-500/10 transition-colors">
-                          <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        <span className="mr-3 w-5 h-5 rounded-full border border-white/15 flex items-center justify-center flex-shrink-0">
+                          <div className="w-1.5 h-1.5 rounded-full bg-zinc-300" />
                         </span>
-                        <span className="font-medium">{ingredient}</span>
+                        <span className="font-medium leading-6">{ingredient}</span>
                       </li>
                     ))}
                   </ul>
                 </section>
 
                 <section>
-                  <h2 className="text-2xl font-black text-white mb-8 flex items-center gap-3">
-                    <span className="w-8 h-1 bg-emerald-500 rounded-full" />
+                  <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-3">
+                    <span className="w-6 h-px bg-white/20 rounded-full" />
                     Instructions
                   </h2>
-                  <ol className="space-y-8">
+                  <ol className="space-y-6">
                     {recipe.steps.map((step, index) => (
                       <li key={index} className="flex gap-6 group">
-                        <span className="flex-shrink-0 w-10 h-10 rounded-2xl bg-white/5 border border-white/10 text-emerald-400 flex items-center justify-center font-black italic shadow-xl group-hover:bg-emerald-500 group-hover:text-black transition-all duration-300">
+                        <span className="flex-shrink-0 w-9 h-9 rounded-xl bg-white/[0.03] border border-white/[0.08] text-zinc-200 flex items-center justify-center font-semibold transition-colors">
                           {index + 1}
                         </span>
-                        <p className="text-zinc-300 pt-1 leading-relaxed font-medium">
+                        <p className="text-zinc-300 pt-1 leading-7">
                           {step}
                         </p>
                       </li>
@@ -171,11 +171,11 @@ export default async function RecipePage({ params }: PageProps) {
               
               {recipe.youtubeVideoUrl && (
                 <section>
-                  <h2 className="text-2xl font-black text-white mb-8 flex items-center gap-3">
-                    <span className="w-8 h-1 bg-emerald-500 rounded-full" />
+                  <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-3">
+                    <span className="w-6 h-px bg-white/20 rounded-full" />
                     Watch it being made
                   </h2>
-                  <div className="rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl">
+                  <div className="rounded-2xl overflow-hidden border border-white/[0.08] shadow-[0_16px_32px_rgba(0,0,0,0.28)]">
                     <VideoEmbed
                       youtubeUrl={recipe.youtubeVideoUrl}
                       title={recipe.title}
@@ -187,8 +187,8 @@ export default async function RecipePage({ params }: PageProps) {
 
             {/* Right Column: Recipe Sidebar */}
             <div className="space-y-8">
-              <aside className="premium-card rounded-[2rem] p-8 sticky top-28">
-                <h3 className="text-xl font-black text-white mb-8 tracking-tight">Recipe Details</h3>
+              <aside className="surface-panel rounded-2xl p-6 sticky top-28">
+                <h3 className="text-lg font-semibold text-white mb-6 tracking-tight">Recipe Details</h3>
                 <div className="space-y-6">
                   {[
                     { label: "Servings", value: recipe.servings, icon: "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" },
@@ -197,9 +197,9 @@ export default async function RecipePage({ params }: PageProps) {
                     { label: "Total Time", value: `${recipe.totalTime} min`, icon: "M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" },
                     { label: "Calories", value: `${recipe.caloriesPerServing} kcal`, icon: "M13 2L3 14h9l-1 8 10-12h-9l1-8z" },
                   ].map((item) => (
-                    <div key={item.label} className="flex justify-between items-center group/item hover:bg-white/5 p-3 -m-3 rounded-xl transition-colors">
+                    <div key={item.label} className="flex justify-between items-center group/item hover:bg-white/[0.03] p-2.5 -m-2.5 rounded-xl transition-colors">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center group-hover/item:bg-emerald-500 group-hover/item:text-black transition-colors">
+                        <div className="w-8 h-8 rounded-lg bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-zinc-300 group-hover/item:text-white transition-colors">
                           <svg
                              xmlns="http://www.w3.org/2000/svg"
                              width="16"
@@ -214,20 +214,20 @@ export default async function RecipePage({ params }: PageProps) {
                              <path d={item.icon} />
                            </svg>
                         </div>
-                        <span className="text-sm font-bold text-zinc-500 uppercase tracking-widest">{item.label}</span>
+                        <span className="text-xs font-semibold text-zinc-500 uppercase tracking-[0.1em]">{item.label}</span>
                       </div>
-                      <span className="text-sm font-black text-white">{item.value}</span>
+                      <span className="text-sm font-semibold text-white">{item.value}</span>
                     </div>
                   ))}
                 </div>
 
                 {recipe.sourceUrl && (
-                  <div className="mt-12 pt-8 border-t border-white/5">
+                  <div className="mt-8 pt-6 border-t border-white/[0.06]">
                     <a
                       href={recipe.sourceUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center justify-center gap-3 h-14 w-full bg-white text-black rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-emerald-500 transition-colors shadow-xl"
+                      className="group flex items-center justify-center gap-3 h-11 w-full bg-white text-black rounded-xl font-semibold text-sm hover:bg-zinc-100 transition-colors"
                     >
                       Original Recipe
                       <svg
@@ -256,4 +256,3 @@ export default async function RecipePage({ params }: PageProps) {
     </>
   );
 }
-

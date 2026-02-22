@@ -32,45 +32,44 @@ export function DashboardClient({ user }: DashboardClientProps) {
   };
 
   return (
-    <div className="space-y-12">
-      <section className="premium-card rounded-[2rem] p-8 md:p-12 overflow-hidden relative">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl -mr-32 -mt-32" />
+    <div className="space-y-8">
+      <section className="surface-panel rounded-2xl p-6 md:p-7 overflow-hidden relative">
         
-        <h2 className="text-2xl font-black text-white mb-8 flex items-center gap-3">
-          <UserCircle className="w-8 h-8 text-emerald-500" />
+        <h2 className="text-lg font-semibold text-zinc-100 mb-6 flex items-center gap-2.5">
+          <UserCircle className="w-5 h-5 text-emerald-300" />
           Account Settings
         </h2>
 
-        <form action={handleSubmit} className="space-y-8 max-w-xl">
+        <form action={handleSubmit} className="space-y-6 max-w-xl">
           <div className="space-y-2">
-            <label className="text-xs font-black uppercase tracking-widest text-zinc-500 ml-1">
+            <label className="text-[0.7rem] font-semibold uppercase tracking-[0.1em] text-zinc-500 ml-1">
               Display Name
             </label>
             <div className="relative group">
-              <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500 group-focus-within:text-emerald-500 transition-colors" />
+              <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 group-focus-within:text-zinc-200 transition-colors" />
               <Input
                 name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="pl-12 h-14 rounded-2xl bg-white/5 border-white/10 text-white focus:border-emerald-500/50 transition-all"
+                className="pl-11 h-11"
                 placeholder="Your name"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs font-black uppercase tracking-widest text-zinc-500 ml-1">
+            <label className="text-[0.7rem] font-semibold uppercase tracking-[0.1em] text-zinc-500 ml-1">
               Email Address
             </label>
             <div className="relative opacity-60">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
               <Input
                 value={user.email}
                 disabled
-                className="pl-12 h-14 rounded-2xl bg-white/5 border-white/10 text-white cursor-not-allowed"
+                className="pl-11 h-11 cursor-not-allowed"
               />
             </div>
-            <p className="text-[10px] text-zinc-600 ml-1 italic font-medium">
+            <p className="text-[11px] leading-5 text-zinc-500 ml-1">
               Email cannot be changed as it is linked to your login provider.
             </p>
           </div>
@@ -78,7 +77,7 @@ export function DashboardClient({ user }: DashboardClientProps) {
           <Button
             type="submit"
             disabled={isPending || name === user.name}
-            className="h-14 px-8 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-black uppercase tracking-widest transition-all shadow-xl shadow-emerald-500/10 disabled:opacity-50 disabled:grayscale"
+            className="h-11 px-5 rounded-xl font-medium"
           >
             {isPending ? (
               <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin" />

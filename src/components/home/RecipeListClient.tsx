@@ -88,14 +88,29 @@ export function RecipeListClient({
 
   return (
     <div className="space-y-8" id="recipes">
-      <div className="space-y-4">
-        <div className="max-w-md">
+      <div className="surface-panel rounded-2xl p-4 md:p-5 space-y-4">
+        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div className="space-y-1">
+            <p className="text-xs uppercase tracking-[0.12em] font-semibold text-zinc-500">
+              Search & Filter
+            </p>
+            <p className="text-sm text-zinc-400 leading-6">
+              {filteredRecipes.length} result{filteredRecipes.length === 1 ? "" : "s"} from {recipes.length} recipes
+            </p>
+          </div>
+          {(filters.tags.length > 0 || filters.maxTime !== "all" || filters.maxCalories !== "all" || searchQuery.trim()) && (
+            <p className="text-xs text-zinc-500">
+              Active filters are applied.
+            </p>
+          )}
+        </div>
+        <div className="max-w-xl">
           <Input
             type="search"
-            placeholder="Search recipes..."
+            placeholder="Search title, tags, or description"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="bg-white/5 border-white/10 text-zinc-100 placeholder:text-zinc-600"
+            className="h-11"
           />
         </div>
         <FilterBar allTags={allTags} onFilterChange={handleFilterChange} />
@@ -104,10 +119,9 @@ export function RecipeListClient({
       {filteredRecipes.length > 0 ? (
         <RecipeGrid recipes={filteredRecipes} favorites={favorites} />
       ) : (
-
         <EmptyState
           heading="No recipes found"
-          message="Try adjusting your filters or search query to find what you're looking for."
+          message="Try removing a tag, increasing the time/calorie limit, or using a broader search term."
         />
       )}
     </div>

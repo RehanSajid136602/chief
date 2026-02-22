@@ -6,26 +6,26 @@
 
 @layer base {
   :root {
-    --background: 240 10% 2%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 4%;
+    --background: 220 20% 4%;
+    --foreground: 210 20% 96%;
+    --card: 220 18% 7%;
     --card-foreground: 0 0% 98%;
-    --popover: 240 10% 4%;
+    --popover: 220 18% 8%;
     --popover-foreground: 0 0% 98%;
-    --primary: 160 84% 39%;
-    --primary-foreground: 240 10% 2%;
-    --secondary: 43 96% 56%;
-    --secondary-foreground: 240 10% 2%;
-    --muted: 240 4% 10%;
-    --muted-foreground: 240 5% 65%;
+    --primary: 156 72% 45%;
+    --primary-foreground: 220 20% 4%;
+    --secondary: 40 92% 58%;
+    --secondary-foreground: 220 20% 4%;
+    --muted: 220 12% 11%;
+    --muted-foreground: 218 12% 68%;
     --accent: 160 84% 39%;
     --accent-foreground: 240 10% 2%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 4% 12%;
-    --input: 240 4% 12%;
+    --border: 220 12% 16%;
+    --input: 220 12% 16%;
     --ring: 160 84% 39%;
-    --radius: 0.75rem;
+    --radius: 0.875rem;
   }
 }
 
@@ -34,9 +34,10 @@
     @apply border-border;
   }
   body {
-    @apply bg-[#050505] text-zinc-50 antialiased;
+    @apply bg-[#090b0f] text-zinc-50 antialiased;
     font-family: 'Outfit', 'Geist', system-ui, sans-serif;
-    line-height: 1.6;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
   }
 
   :focus-visible {
@@ -50,11 +51,23 @@
   }
 
   .premium-glass {
-    @apply backdrop-blur-xl bg-black/40 border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.4)];
+    @apply backdrop-blur-xl bg-white/[0.03] border border-white/10 shadow-[0_10px_28px_rgba(0,0,0,0.32)];
   }
 
   .premium-card {
-    @apply relative overflow-hidden bg-[#0a0a0a] border border-white/5 hover:border-emerald-500/30 transition-all duration-500;
+    @apply relative overflow-hidden bg-[#10141b] border border-white/[0.06] shadow-[0_8px_24px_rgba(0,0,0,0.22)] transition-all duration-300;
+  }
+
+  .surface-subtle {
+    @apply bg-white/[0.02] border border-white/[0.06];
+  }
+
+  .surface-panel {
+    @apply bg-[#0f1319] border border-white/[0.07] shadow-[0_10px_30px_rgba(0,0,0,0.28)];
+  }
+
+  .surface-elevated {
+    @apply bg-[#121821] border border-white/[0.08] shadow-[0_14px_36px_rgba(0,0,0,0.34)];
   }
 
   .text-gradient {
@@ -91,3 +104,11 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

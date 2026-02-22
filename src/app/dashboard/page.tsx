@@ -30,27 +30,27 @@ export default async function DashboardPage() {
   return (
     <>
       <Navbar session={session} />
-      <main className="min-h-screen pt-32 pb-20">
+      <main className="min-h-screen pt-28 pb-16 md:pt-32 md:pb-20">
         <Container className="max-w-6xl">
-          <header className="mb-16">
-            <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-4">
-              Welcome back, <br />
-              <span className="text-gradient-emerald">
-                {user.name || "Chef"}
-              </span>
+          <header className="mb-10 md:mb-12 space-y-2">
+            <p className="text-xs uppercase tracking-[0.12em] font-semibold text-zinc-500">
+              Dashboard
+            </p>
+            <h1 className="text-3xl md:text-5xl font-semibold text-zinc-100 tracking-tight">
+              Welcome back, {user.name || "Chef"}
             </h1>
-            <p className="text-zinc-500 font-medium">
-              Manage your profile and explore your saved culinary masterpieces.
+            <p className="text-sm md:text-base leading-6 text-zinc-400 max-w-2xl">
+              Manage your profile and return to the recipes you saved. Everything is grouped for quick scanning.
             </p>
           </header>
 
-          <div className="grid lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-2 space-y-16">
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
+            <div className="lg:col-span-2 space-y-10">
               <section className="space-y-8">
-                <h2 className="text-2xl font-black text-white flex items-center gap-3">
-                  <Heart className="w-8 h-8 text-rose-500 fill-rose-500" />
+                <h2 className="text-xl md:text-2xl font-semibold text-zinc-100 flex items-center gap-3">
+                  <Heart className="w-6 h-6 text-rose-400 fill-rose-400" />
                   My Favorites
-                  <span className="ml-2 text-sm font-bold text-zinc-600 px-3 py-1 rounded-full bg-white/5 border border-white/10 uppercase tracking-widest">
+                  <span className="ml-1 text-xs font-semibold text-zinc-400 px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/[0.06] uppercase tracking-[0.08em]">
                     {favoriteRecipes.length}
                   </span>
                 </h2>
@@ -61,18 +61,18 @@ export default async function DashboardPage() {
                     favorites={user.favorites}
                   />
                 ) : (
-                  <div className="premium-card rounded-[2rem] p-12 text-center space-y-6">
-                    <div className="w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto">
-                      <ChefHat className="w-10 h-10 text-emerald-500" />
+                  <div className="surface-panel rounded-2xl p-8 md:p-10 text-left space-y-5">
+                    <div className="w-12 h-12 bg-white/[0.03] border border-white/[0.08] rounded-xl flex items-center justify-center">
+                      <ChefHat className="w-5 h-5 text-emerald-300" />
                     </div>
                     <div className="space-y-2">
-                      <h3 className="text-xl font-bold text-white">Your cookbook is empty</h3>
-                      <p className="text-zinc-500 max-w-sm mx-auto">
+                      <h3 className="text-lg font-semibold text-zinc-100">Your cookbook is empty</h3>
+                      <p className="text-zinc-400 max-w-md leading-6">
                         Start exploring our curated collection and save recipes you&apos;d love to cook later.
                       </p>
                     </div>
                     <Link href="/#recipes">
-                      <Button className="rounded-xl border-white/10 bg-white/5 text-white hover:bg-white/10 h-12 px-8 font-bold">
+                      <Button variant="outline" className="h-11 px-5 rounded-xl font-medium">
                         Browse Recipes
                       </Button>
                     </Link>
