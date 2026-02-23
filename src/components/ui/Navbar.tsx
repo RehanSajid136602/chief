@@ -11,6 +11,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Logo } from "@/components/ui/Logo";
 import { cn } from "@/lib/utils";
 
 interface NavbarProps {
@@ -52,12 +53,7 @@ export function Navbar({ session }: NavbarProps) {
             href="/"
             className="group flex items-center gap-2.5"
           >
-            <div className="w-8 h-8 rounded-lg border border-white/10 bg-white/[0.03] flex items-center justify-center transition-colors group-hover:border-emerald-400/40">
-              <span className="text-emerald-300 font-black text-xs">RH</span>
-            </div>
-            <span className="text-[1.05rem] font-semibold tracking-tight text-zinc-100 group-hover:text-white transition-colors">
-              Recipe<span className="text-emerald-300">Hub</span>
-            </span>
+            <Logo className="transition-transform duration-200 group-hover:translate-y-[-1px]" />
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">

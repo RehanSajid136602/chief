@@ -10,7 +10,12 @@
       "cookTime": 20,
       "totalTime": 35,
       "caloriesPerServing": 520,
-      "tags": ["pasta", "italian", "comfort-food", "quick"],
+      "tags": [
+        "pasta",
+        "italian",
+        "comfort-food",
+        "quick"
+      ],
       "category": "Main Course",
       "images": [
         "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=800&q=80",
@@ -49,7 +54,12 @@
       "cookTime": 40,
       "totalTime": 70,
       "caloriesPerServing": 450,
-      "tags": ["curry", "indian", "spicy", "chicken"],
+      "tags": [
+        "curry",
+        "indian",
+        "spicy",
+        "chicken"
+      ],
       "category": "Main Course",
       "images": [
         "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=800&q=80",
@@ -93,7 +103,12 @@
       "cookTime": 15,
       "totalTime": 30,
       "caloriesPerServing": 380,
-      "tags": ["mexican", "quick", "beef", "street-food"],
+      "tags": [
+        "mexican",
+        "quick",
+        "beef",
+        "street-food"
+      ],
       "category": "Main Course",
       "images": [
         "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=800&q=80",
@@ -135,7 +150,12 @@
       "cookTime": 35,
       "totalTime": 50,
       "caloriesPerServing": 420,
-      "tags": ["vegetarian", "italian", "comfort-food", "mushrooms"],
+      "tags": [
+        "vegetarian",
+        "italian",
+        "comfort-food",
+        "mushrooms"
+      ],
       "category": "Main Course",
       "images": [
         "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=800&q=80",
@@ -178,12 +198,17 @@
       "cookTime": 25,
       "totalTime": 45,
       "caloriesPerServing": 390,
-      "tags": ["thai", "curry", "spicy", "vegetables"],
+      "tags": [
+        "thai",
+        "curry",
+        "spicy",
+        "vegetables"
+      ],
       "category": "Main Course",
       "images": [
         "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=800&q=80",
         "https://images.unsplash.com/photo-1529563021893-cc83c992d75d?w=800&q=80",
-        "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&q=80"
+        "https://images.pexels.com/photos/31029754/pexels-photo-31029754/free-photo-of-delicious-thai-green-curry-with-vegetables.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       ],
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=JFmZ3dp24N8",
       "sourceUrl": "https://www.bbcgoodfood.com/recipes/thai-green-curry",
@@ -220,7 +245,12 @@
       "cookTime": 10,
       "totalTime": 25,
       "caloriesPerServing": 580,
-      "tags": ["american", "beef", "quick", "grill"],
+      "tags": [
+        "american",
+        "beef",
+        "quick",
+        "grill"
+      ],
       "category": "Main Course",
       "images": [
         "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80",
@@ -264,11 +294,16 @@
       "cookTime": 15,
       "totalTime": 25,
       "caloriesPerServing": 480,
-      "tags": ["seafood", "pasta", "quick", "garlic"],
+      "tags": [
+        "seafood",
+        "pasta",
+        "quick",
+        "garlic"
+      ],
       "category": "Main Course",
       "images": [
-        "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=800&q=80",
-        "https://images.unsplash.com/photo-1598866594230-a7c12756260f?w=800&q=80",
+        "https://images.pexels.com/photos/4518839/pexels-photo-4518839.jpeg?cs=srgb&dl=pexels-valeria-boltneva-1129560-4518839.jpg&fm=jpg",
+        "https://images.pexels.com/photos/34536632/pexels-photo-34536632.jpeg?cs=srgb&dl=pexels-wewe-yang-251355851-34536632.jpg&fm=jpg",
         "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80"
       ],
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=lYx2bqL5B7Q",
@@ -307,7 +342,12 @@
       "cookTime": 10,
       "totalTime": 25,
       "caloriesPerServing": 220,
-      "tags": ["vegan", "asian", "quick", "healthy"],
+      "tags": [
+        "vegan",
+        "asian",
+        "quick",
+        "healthy"
+      ],
       "category": "Main Course",
       "images": [
         "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&q=80",
@@ -351,12 +391,17 @@
       "cookTime": 25,
       "totalTime": 45,
       "caloriesPerServing": 510,
-      "tags": ["italian", "chicken", "comfort-food", "cheese"],
+      "tags": [
+        "italian",
+        "chicken",
+        "comfort-food",
+        "cheese"
+      ],
       "category": "Main Course",
       "images": [
         "https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?w=800&q=80",
         "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=800&q=80",
-        "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=800&q=80"
+        "https://images.pexels.com/photos/13443376/pexels-photo-13443376.jpeg?cs=srgb&dl=pexels-engin-akyurt-1435904-13443376.jpg&fm=jpg"
       ],
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=n-hKc2QhJzc",
       "sourceUrl": "https://www.bbcgoodfood.com/recipes/chicken-parmesan",
@@ -394,7 +439,13 @@
       "cookTime": 0,
       "totalTime": 15,
       "caloriesPerServing": 180,
-      "tags": ["salad", "greek", "vegetarian", "healthy", "quick"],
+      "tags": [
+        "salad",
+        "greek",
+        "vegetarian",
+        "healthy",
+        "quick"
+      ],
       "category": "Salad",
       "images": [
         "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&q=80",
@@ -436,12 +487,17 @@
       "cookTime": 90,
       "totalTime": 110,
       "caloriesPerServing": 540,
-      "tags": ["pasta", "italian", "beef", "comfort-food"],
+      "tags": [
+        "pasta",
+        "italian",
+        "beef",
+        "comfort-food"
+      ],
       "category": "Main Course",
       "images": [
         "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800&q=80",
-        "https://images.unsplash.com/photo-1598866594230-a7c12756260f?w=800&q=80",
-        "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=800&q=80"
+        "https://images.pexels.com/photos/5807018/pexels-photo-5807018.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+        "https://images.pexels.com/photos/15500451/pexels-photo-15500451/free-photo-of-spaghetti-bolognese-on-a-white-plate.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       ],
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=n-Ft54Jf1l8",
       "sourceUrl": "https://www.bbcgoodfood.com/recipes/spaghetti-bolognese",
@@ -486,11 +542,16 @@
       "cookTime": 15,
       "totalTime": 35,
       "caloriesPerServing": 460,
-      "tags": ["thai", "noodles", "shrimp", "peanuts"],
+      "tags": [
+        "thai",
+        "noodles",
+        "shrimp",
+        "peanuts"
+      ],
       "category": "Main Course",
       "images": [
         "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=800&q=80",
-        "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80",
+        "https://images.pexels.com/photos/27640564/pexels-photo-27640564/free-photo-of-pad-thai-with-shrimp-and-lime.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
         "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=800&q=80"
       ],
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=5q1wMGU-F48",
