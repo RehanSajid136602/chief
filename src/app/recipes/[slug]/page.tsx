@@ -7,6 +7,7 @@ import { VideoEmbed } from "@/components/recipe/VideoEmbed";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/Container";
 import { Navbar } from "@/components/ui/Navbar";
+import { Reveal } from "@/components/ui/Reveal";
 import { auth } from "@/auth";
 import { findUserByEmail } from "@/lib/users";
 import { FavoriteButton } from "@/components/recipe/FavoriteButton";
@@ -72,54 +73,56 @@ export default async function RecipePage({ params }: PageProps) {
           
           <div className="absolute bottom-0 left-0 right-0 z-20 pb-12">
             <Container className="max-w-5xl">
-              <div className="flex items-center justify-between mb-6">
-                <Link href="/#recipes">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                      className="text-zinc-300 hover:text-white bg-white/[0.04] border border-white/[0.08] backdrop-blur-md rounded-full px-5"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="mr-2"
+              <Reveal y={14}>
+                <div className="flex items-center justify-between mb-6">
+                  <Link href="/#recipes">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                        className="text-zinc-300 hover:text-white bg-white/[0.04] border border-white/[0.08] backdrop-blur-md rounded-full px-5"
                     >
-                      <path d="m15 18-6-6 6-6" />
-                    </svg>
-                    Back to collection
-                  </Button>
-                </Link>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="mr-2"
+                      >
+                        <path d="m15 18-6-6 6-6" />
+                      </svg>
+                      Back to collection
+                    </Button>
+                  </Link>
 
-                <FavoriteButton 
-                  recipeSlug={slug}
-                  initialIsFavorite={isFavorite}
-                  className="bg-white/10 backdrop-blur-md"
-                />
-              </div>
+                  <FavoriteButton 
+                    recipeSlug={slug}
+                    initialIsFavorite={isFavorite}
+                    className="bg-white/10 backdrop-blur-md"
+                  />
+                </div>
 
-              
-              <div className="flex flex-wrap gap-2 mb-4">
-                {recipe.tags.map((tag) => (
-                  <span key={tag} className="text-[10px] font-semibold uppercase tracking-[0.1em] px-2.5 py-1 bg-white/[0.06] border border-white/[0.08] text-zinc-200 rounded-md">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              
-              <h1 className="text-3xl md:text-6xl font-semibold text-white leading-tight mb-3 tracking-tight">
-                {recipe.title}
-              </h1>
-              
-              <p className="text-base md:text-lg text-zinc-300 max-w-3xl leading-7">
-                {recipe.description}
-              </p>
+                
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {recipe.tags.map((tag) => (
+                    <span key={tag} className="text-[10px] font-semibold uppercase tracking-[0.1em] px-2.5 py-1 bg-white/[0.06] border border-white/[0.08] text-zinc-200 rounded-md reveal-on-mount">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                <h1 className="text-3xl md:text-6xl font-semibold text-white leading-tight mb-3 tracking-tight">
+                  {recipe.title}
+                </h1>
+                
+                <p className="text-base md:text-lg text-zinc-300 max-w-3xl leading-7">
+                  {recipe.description}
+                </p>
+              </Reveal>
             </Container>
           </div>
         </section>
@@ -127,9 +130,9 @@ export default async function RecipePage({ params }: PageProps) {
         <Container className="max-w-5xl mt-10">
           <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
             {/* Left Column: Info & Ingredients */}
-            <div className="lg:col-span-2 space-y-12">
+            <Reveal className="lg:col-span-2 space-y-12" y={16}>
               <div className="grid sm:grid-cols-2 gap-8 md:gap-10">
-                <section>
+                <section className="reveal-on-mount">
                   <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-3">
                     <span className="w-6 h-px bg-white/20 rounded-full" />
                     Ingredients
@@ -149,7 +152,7 @@ export default async function RecipePage({ params }: PageProps) {
                   </ul>
                 </section>
 
-                <section>
+                <section className="reveal-on-mount" style={{ ["--reveal-delay" as string]: "50ms" }}>
                   <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-3">
                     <span className="w-6 h-px bg-white/20 rounded-full" />
                     Instructions
@@ -170,7 +173,7 @@ export default async function RecipePage({ params }: PageProps) {
               </div>
               
               {recipe.youtubeVideoUrl && (
-                <section>
+                <section className="reveal-on-mount" style={{ ["--reveal-delay" as string]: "90ms" }}>
                   <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-3">
                     <span className="w-6 h-px bg-white/20 rounded-full" />
                     Watch it being made
@@ -183,10 +186,10 @@ export default async function RecipePage({ params }: PageProps) {
                   </div>
                 </section>
               )}
-            </div>
+            </Reveal>
 
             {/* Right Column: Recipe Sidebar */}
-            <div className="space-y-8">
+            <Reveal className="space-y-8" y={16} delay={0.03}>
               <aside className="surface-panel rounded-2xl p-6 sticky top-28">
                 <h3 className="text-lg font-semibold text-white mb-6 tracking-tight">Recipe Details</h3>
                 <div className="space-y-6">
@@ -223,6 +226,11 @@ export default async function RecipePage({ params }: PageProps) {
 
                 {recipe.sourceUrl && (
                   <div className="mt-8 pt-6 border-t border-white/[0.06]">
+                    <Link href="/dashboard/planner" className="mb-3 block">
+                      <Button className="h-11 w-full rounded-xl bg-emerald-400 hover:bg-emerald-300 text-black font-semibold">
+                        Add to Planner
+                      </Button>
+                    </Link>
                     <a
                       href={recipe.sourceUrl}
                       target="_blank"
@@ -249,7 +257,7 @@ export default async function RecipePage({ params }: PageProps) {
                   </div>
                 )}
               </aside>
-            </div>
+            </Reveal>
           </div>
         </Container>
       </main>

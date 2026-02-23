@@ -88,7 +88,7 @@ export function Navbar({ session }: NavbarProps) {
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => signOut()}
+                  onClick={() => signOut({ callbackUrl: window.location.origin })}
                   className="rounded-full px-4"
                 >
                   Sign out
@@ -166,7 +166,7 @@ export function Navbar({ session }: NavbarProps) {
                       </p>
                       <Button
                         variant="ghost"
-                        onClick={() => signOut()}
+                        onClick={() => signOut({ callbackUrl: window.location.origin })}
                         className="justify-start text-xl font-semibold p-0 hover:bg-transparent hover:text-white"
                       >
                         Sign out

@@ -8,6 +8,9 @@ interface RecipeGridProps {
   showMatchBadge?: boolean;
   matchPercents?: number[];
   favorites?: string[];
+  pantryMatchCounts?: number[];
+  animateEntrance?: boolean;
+  revealLimit?: number;
 }
 
 export function RecipeGrid({
@@ -15,6 +18,9 @@ export function RecipeGrid({
   showMatchBadge = false,
   matchPercents,
   favorites = [],
+  pantryMatchCounts,
+  animateEntrance = false,
+  revealLimit = 9,
 }: RecipeGridProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -25,6 +31,9 @@ export function RecipeGrid({
           matchPercent={matchPercents?.[index]}
           showMatchBadge={showMatchBadge}
           isFavorite={favorites.includes(recipe.slug)}
+          pantryMatchCount={pantryMatchCounts?.[index]}
+          enableReveal={animateEntrance && index < revealLimit}
+          revealIndex={index}
         />
       ))}
     </div>

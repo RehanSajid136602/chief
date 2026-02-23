@@ -5,16 +5,16 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-medium tracking-[-0.01em] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#090b0f] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-medium tracking-[-0.01em] transition-all duration-200 motion-safe:active:scale-[0.985] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#090b0f] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-[0_8px_22px_rgba(16,185,129,0.2)] hover:bg-primary/95",
+          "bg-primary text-primary-foreground shadow-[0_8px_22px_rgba(16,185,129,0.2)] hover:bg-primary/95 motion-safe:hover:-translate-y-px",
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
-          "border border-white/10 bg-white/[0.03] text-zinc-100 shadow-[0_4px_12px_rgba(0,0,0,0.12)] hover:bg-white/[0.06]",
+          "border border-white/10 bg-white/[0.03] text-zinc-100 shadow-[0_4px_12px_rgba(0,0,0,0.12)] hover:bg-white/[0.06] motion-safe:hover:-translate-y-px",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "text-zinc-300 hover:bg-white/[0.05] hover:text-white",

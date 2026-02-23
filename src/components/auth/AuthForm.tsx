@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Reveal } from "@/components/ui/Reveal";
 import { User, Mail, Lock, ArrowRight, Loader2 } from "lucide-react";
 
 interface AuthFormProps {
@@ -81,9 +82,10 @@ export function AuthForm({ mode }: AuthFormProps) {
 
   return (
     <div className="space-y-6 max-w-sm mx-auto">
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <Reveal y={10}>
+        <form onSubmit={handleSubmit} className="space-y-4">
         {mode === "signup" && (
-          <div className="space-y-2">
+          <div className="space-y-2 reveal-on-mount" style={{ ["--reveal-delay" as string]: "30ms" }}>
             <Label htmlFor="name" className="text-zinc-300 text-[0.7rem] font-semibold uppercase tracking-[0.1em] ml-1">
               Full Name
             </Label>
@@ -105,7 +107,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           </div>
         )}
 
-        <div className="space-y-2">
+        <div className="space-y-2 reveal-on-mount" style={{ ["--reveal-delay" as string]: mode === "signup" ? "60ms" : "30ms" }}>
           <Label htmlFor="email" className="text-zinc-300 text-[0.7rem] font-semibold uppercase tracking-[0.1em] ml-1">
             Email Address
           </Label>
@@ -125,7 +127,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           </div>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-2 reveal-on-mount" style={{ ["--reveal-delay" as string]: mode === "signup" ? "90ms" : "60ms" }}>
           <Label htmlFor="password" className="text-zinc-300 text-[0.7rem] font-semibold uppercase tracking-[0.1em] ml-1">
             Password
           </Label>
@@ -147,7 +149,7 @@ export function AuthForm({ mode }: AuthFormProps) {
         </div>
 
         {error && (
-          <div className="text-sm text-rose-300 bg-rose-400/10 border border-rose-400/20 p-3 rounded-xl flex items-center gap-2.5 leading-5">
+          <div className="text-sm text-rose-300 bg-rose-400/10 border border-rose-400/20 p-3 rounded-xl flex items-center gap-2.5 leading-5 reveal-on-mount">
             <div className="w-1.5 h-1.5 rounded-full bg-rose-300" />
             {error}
           </div>
@@ -156,7 +158,8 @@ export function AuthForm({ mode }: AuthFormProps) {
         <Button
           type="submit"
           disabled={isLoading}
-          className="w-full h-11 font-semibold"
+          className="w-full h-11 font-semibold reveal-on-mount"
+          style={{ ["--reveal-delay" as string]: mode === "signup" ? "120ms" : "90ms" }}
         >
           {isLoading ? (
             <Loader2 className="w-5 h-5 animate-spin" />
@@ -168,7 +171,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           )}
         </Button>
 
-        <div className="relative py-2">
+        <div className="relative py-2 reveal-on-mount" style={{ ["--reveal-delay" as string]: mode === "signup" ? "140ms" : "110ms" }}>
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t border-white/[0.08]" />
           </div>
@@ -181,7 +184,8 @@ export function AuthForm({ mode }: AuthFormProps) {
           type="button"
           variant="outline"
           onClick={handleGoogleSignIn}
-          className="w-full h-11 bg-white text-black hover:bg-zinc-100 rounded-xl font-medium flex items-center justify-center gap-2.5"
+          className="w-full h-11 bg-white text-black hover:bg-zinc-100 rounded-xl font-medium flex items-center justify-center gap-2.5 reveal-on-mount"
+          style={{ ["--reveal-delay" as string]: mode === "signup" ? "160ms" : "130ms" }}
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path
@@ -204,7 +208,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           Continue with Google
         </Button>
 
-        <p className="text-left text-sm leading-6 text-zinc-500">
+        <p className="text-left text-sm leading-6 text-zinc-500 reveal-on-mount" style={{ ["--reveal-delay" as string]: mode === "signup" ? "180ms" : "150ms" }}>
           {mode === "login" ? (
             <>
               New to RecipeHub?{" "}
@@ -227,7 +231,8 @@ export function AuthForm({ mode }: AuthFormProps) {
             </>
           )}
         </p>
-      </form>
+        </form>
+      </Reveal>
     </div>
   );
 }

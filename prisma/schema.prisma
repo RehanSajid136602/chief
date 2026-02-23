@@ -1,0 +1,169 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum MealSlot {
+  BREAKFAST
+  LUNCH
+  DINNER
+}
+
+enum AiGenerationType {
+  WEEK_PLAN
+  SLOT_REGEN
+}
+
+model User {
+  id          String           @id @default(cuid())
+  email       String           @unique
+  name        String?
+  password    String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  favorites   FavoriteRecipe[]
+  household   Household?
+  pantryItems PantryItem[]
+  mealPlans   MealPlanWeek[]
+  shopping    ShoppingList[]
+  aiRuns      AiGenerationRun[]
+}
+
+model FavoriteRecipe {
+  id         String   @id @default(cuid())
+  userId     String
+  recipeSlug String
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, recipeSlug])
+  @@index([userId])
+}
+
+model Household {
+  id                 String   @id @default(cuid())
+  userId             String   @unique
+  householdName      String?
+  adultCount         Int      @default(1)
+  kidCount           Int      @default(0)
+  dietaryPreferences Json?
+  allergies          Json?
+  dislikedIngredients Json?
+  weeklyBudget       Int?
+  maxWeekdayCookTime Int?
+  maxWeekendCookTime Int?
+  mealsPerWeek       Int?
+  prefersLeftovers   Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PantryItem {
+  id             String    @id @default(cuid())
+  userId         String
+  name           String
+  normalizedName String
+  quantity       Float?
+  unit           String?
+  category       String?
+  expiresAt      DateTime?
+  lowStockThreshold Float?
+  note           String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, normalizedName])
+}
+
+model MealPlanWeek {
+  id         String        @id @default(cuid())
+  userId     String
+  weekKey    String
+  timezone   String?
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  entries    MealPlanEntry[]
+  lists      ShoppingList[]
+
+  @@unique([userId, weekKey])
+  @@index([userId])
+}
+
+model MealPlanEntry {
+  id                     String      @id @default(cuid())
+  mealPlanWeekId         String
+  dayOfWeek              Int
+  slot                   MealSlot
+  recipeSlug             String
+  recipeTitleSnapshot    String
+  recipeTotalTimeSnapshot Int?
+  recipeCaloriesSnapshot Int?
+  note                   String?
+  isLeftoversRepeat      Boolean     @default(false)
+  rationale              String?
+  createdAt              DateTime    @default(now())
+  updatedAt              DateTime    @updatedAt
+  mealPlanWeek           MealPlanWeek @relation(fields: [mealPlanWeekId], references: [id], onDelete: Cascade)
+
+  @@unique([mealPlanWeekId, dayOfWeek, slot])
+  @@index([mealPlanWeekId])
+}
+
+model ShoppingList {
+  id             String             @id @default(cuid())
+  userId         String
+  mealPlanWeekId String?
+  title          String
+  strictness     String?
+  generatedAt    DateTime?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  user           User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mealPlanWeek   MealPlanWeek?      @relation(fields: [mealPlanWeekId], references: [id], onDelete: SetNull)
+  items          ShoppingListItem[]
+
+  @@index([userId])
+  @@index([mealPlanWeekId])
+}
+
+model ShoppingListItem {
+  id              String      @id @default(cuid())
+  shoppingListId   String
+  name            String
+  normalizedName  String?
+  quantityText    String?
+  category        String?
+  note            String?
+  checked         Boolean     @default(false)
+  isManual        Boolean     @default(false)
+  sourceRecipeSlugs Json?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  shoppingList    ShoppingList @relation(fields: [shoppingListId], references: [id], onDelete: Cascade)
+
+  @@index([shoppingListId])
+}
+
+model AiGenerationRun {
+  id             String           @id @default(cuid())
+  userId         String
+  type           AiGenerationType
+  model          String
+  requestScope   String?
+  status         String
+  latencyMs      Int?
+  errorCode      String?
+  errorMessage   String?
+  createdAt      DateTime         @default(now())
+  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+}

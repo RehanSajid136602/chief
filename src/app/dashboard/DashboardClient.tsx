@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { updateName } from "@/app/actions/user";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Reveal } from "@/components/ui/Reveal";
 import { User, Mail, UserCircle, Save, CheckCircle2 } from "lucide-react";
 
 
@@ -33,7 +34,8 @@ export function DashboardClient({ user }: DashboardClientProps) {
 
   return (
     <div className="space-y-8">
-      <section className="surface-panel rounded-2xl p-6 md:p-7 overflow-hidden relative">
+      <Reveal y={12}>
+        <section className="surface-panel rounded-2xl p-6 md:p-7 overflow-hidden relative">
         
         <h2 className="text-lg font-semibold text-zinc-100 mb-6 flex items-center gap-2.5">
           <UserCircle className="w-5 h-5 text-emerald-300" />
@@ -92,7 +94,8 @@ export function DashboardClient({ user }: DashboardClientProps) {
             )}
           </Button>
         </form>
-      </section>
+        </section>
+      </Reveal>
     </div>
   );
 }

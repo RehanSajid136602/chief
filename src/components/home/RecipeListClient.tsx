@@ -6,17 +6,20 @@ import { RecipeGrid } from "@/components/recipe/RecipeGrid";
 import { FilterBar } from "@/components/recipe/FilterBar";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Input } from "@/components/ui/input";
+import { Reveal } from "@/components/ui/Reveal";
 
 interface RecipeListClientProps {
   recipes: Recipe[];
   allTags: string[];
   favorites: string[];
+  pantryMatchCountsBySlug?: Record<string, number>;
 }
 
 export function RecipeListClient({ 
   recipes, 
   allTags,
   favorites,
+  pantryMatchCountsBySlug = {},
 }: RecipeListClientProps) {
 
   const [filters, setFilters] = useState({
@@ -88,42 +91,52 @@ export function RecipeListClient({
 
   return (
     <div className="space-y-8" id="recipes">
-      <div className="surface-panel rounded-2xl p-4 md:p-5 space-y-4">
-        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-          <div className="space-y-1">
-            <p className="text-xs uppercase tracking-[0.12em] font-semibold text-zinc-500">
-              Search & Filter
-            </p>
-            <p className="text-sm text-zinc-400 leading-6">
-              {filteredRecipes.length} result{filteredRecipes.length === 1 ? "" : "s"} from {recipes.length} recipes
-            </p>
+      <Reveal y={12}>
+        <div className="surface-panel rounded-2xl p-4 md:p-5 space-y-4">
+          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div className="space-y-1">
+              <p className="text-xs uppercase tracking-[0.12em] font-semibold text-zinc-500">
+                Search & Filter
+              </p>
+              <p className="text-sm text-zinc-400 leading-6">
+                {filteredRecipes.length} result{filteredRecipes.length === 1 ? "" : "s"} from {recipes.length} recipes
+              </p>
+            </div>
+            {(filters.tags.length > 0 || filters.maxTime !== "all" || filters.maxCalories !== "all" || searchQuery.trim()) && (
+              <p className="text-xs text-zinc-500">
+                Active filters are applied.
+              </p>
+            )}
           </div>
-          {(filters.tags.length > 0 || filters.maxTime !== "all" || filters.maxCalories !== "all" || searchQuery.trim()) && (
-            <p className="text-xs text-zinc-500">
-              Active filters are applied.
-            </p>
-          )}
+          <div className="max-w-xl">
+            <Input
+              type="search"
+              placeholder="Search title, tags, or description"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="h-11"
+            />
+          </div>
+          <FilterBar allTags={allTags} onFilterChange={handleFilterChange} />
         </div>
-        <div className="max-w-xl">
-          <Input
-            type="search"
-            placeholder="Search title, tags, or description"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="h-11"
-          />
-        </div>
-        <FilterBar allTags={allTags} onFilterChange={handleFilterChange} />
-      </div>
+      </Reveal>
 
-      {filteredRecipes.length > 0 ? (
-        <RecipeGrid recipes={filteredRecipes} favorites={favorites} />
-      ) : (
-        <EmptyState
-          heading="No recipes found"
-          message="Try removing a tag, increasing the time/calorie limit, or using a broader search term."
-        />
-      )}
+      <Reveal y={18} delay={0.04}>
+        {filteredRecipes.length > 0 ? (
+          <RecipeGrid
+            recipes={filteredRecipes}
+            favorites={favorites}
+            pantryMatchCounts={filteredRecipes.map((r) => pantryMatchCountsBySlug[r.slug] ?? 0)}
+            animateEntrance={filteredRecipes.length <= 18}
+            revealLimit={12}
+          />
+        ) : (
+          <EmptyState
+            heading="No recipes found"
+            message="Try removing a tag, increasing the time/calorie limit, or using a broader search term."
+          />
+        )}
+      </Reveal>
     </div>
   );
 }

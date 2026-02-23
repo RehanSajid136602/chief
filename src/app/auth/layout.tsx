@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Metadata } from "next";
+import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: "Authentication – RecipeHub",
@@ -8,10 +9,14 @@ export const metadata: Metadata = {
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
-    <section className="min-h-screen bg-[#090b0f] p-4 md:p-6">
+    <section className="relative min-h-screen bg-[#090b0f] p-4 md:p-6 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-12 left-[12%] h-56 w-56 rounded-full bg-emerald-400/5 blur-3xl animate-glow-drift" />
+        <div className="absolute bottom-10 right-[8%] h-48 w-48 rounded-full bg-cyan-300/5 blur-3xl animate-glow-drift" style={{ animationDelay: "-6s" }} />
+      </div>
       <div className="mx-auto grid min-h-[calc(100vh-2rem)] max-w-6xl items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="hidden lg:block">
-          <div className="max-w-xl space-y-5">
+          <Reveal className="max-w-xl space-y-5" y={18}>
             <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-zinc-400">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
               RecipeHub Access
@@ -29,18 +34,20 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
                 ["Fast filters", "Time and calorie sorting"],
                 ["Recipe pages", "Clear steps and details"],
               ].map(([title, desc]) => (
-                <div key={title} className="surface-subtle rounded-xl p-4">
+                <div key={title} className="surface-subtle rounded-xl p-4 reveal-on-mount" style={{ ["--reveal-delay" as string]: "120ms" }}>
                   <p className="text-sm font-semibold text-zinc-100">{title}</p>
                   <p className="mt-1 text-xs leading-5 text-zinc-400">{desc}</p>
                 </div>
               ))}
             </div>
-          </div>
+          </Reveal>
         </div>
         <div className="w-full max-w-md lg:justify-self-end">
-          <div className="surface-elevated rounded-2xl p-6 md:p-8">
+          <Reveal y={14} delay={0.04}>
+            <div className="surface-elevated rounded-2xl p-6 md:p-8">
             {children}
-          </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

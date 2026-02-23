@@ -1,10 +1,13 @@
 import fs from "fs";
 import path from "path";
 import bcrypt from "bcryptjs";
+import { prisma } from "@/lib/db/prisma";
 
 const USERS_FILE = path.join(process.cwd(), "data", "users.json");
+const SHOULD_USE_PRISMA = Boolean(process.env.DATABASE_URL);
+const ALLOW_FILE_FALLBACK = process.env.NODE_ENV !== "production";
 
-interface User {
+export interface User {
   id: string;
   email: string;
   name: string;
@@ -38,6 +41,30 @@ function writeUsersFile(data: UsersData): void {
 }
 
 export async function findUserByEmail(email: string): Promise<User | null> {
+  if (SHOULD_USE_PRISMA) {
+    try {
+      const user = await prisma.user.findUnique({
+        where: { email },
+        include: { favorites: true },
+      });
+
+      if (!user) return null;
+
+      return {
+        id: user.id,
+        email: user.email,
+        name: user.name ?? "",
+        password: user.password ?? "",
+        createdAt: user.createdAt.toISOString(),
+        favorites: user.favorites.map((f) => f.recipeSlug),
+      };
+    } catch (error) {
+      console.error("Error reading user from Prisma:", error);
+      return null;
+    }
+  }
+
+  if (!ALLOW_FILE_FALLBACK) return null;
   const data = readUsersFile();
   const user = data.users.find((u) => u.email === email) || null;
   if (user && !user.favorites) {
@@ -50,6 +77,47 @@ export async function updateUser(
   email: string,
   updates: Partial<User>
 ): Promise<User | null> {
+  if (SHOULD_USE_PRISMA) {
+    try {
+      const existing = await prisma.user.findUnique({
+        where: { email },
+      });
+      if (!existing) return null;
+
+      const favoriteSlugs = updates.favorites;
+
+      await prisma.$transaction(async (tx) => {
+        await tx.user.update({
+          where: { email },
+          data: {
+            name: updates.name ?? existing.name,
+            password: updates.password ?? existing.password,
+          },
+        });
+
+        if (favoriteSlugs) {
+          await tx.favoriteRecipe.deleteMany({ where: { userId: existing.id } });
+          if (favoriteSlugs.length > 0) {
+            await tx.favoriteRecipe.createMany({
+              data: favoriteSlugs.map((recipeSlug) => ({
+                userId: existing.id,
+                recipeSlug,
+              })),
+            });
+          }
+        }
+      });
+
+      return findUserByEmail(email);
+    } catch (error) {
+      console.error("Error updating user in Prisma:", error);
+      return null;
+    }
+  }
+
+  if (!ALLOW_FILE_FALLBACK) {
+    throw new Error("Database is required in production");
+  }
   const data = readUsersFile();
   const userIndex = data.users.findIndex((u) => u.email === email);
   if (userIndex === -1) return null;
@@ -69,6 +137,34 @@ export async function createUser(
   name: string,
   password: string
 ): Promise<User> {
+  if (SHOULD_USE_PRISMA) {
+    const existingUser = await prisma.user.findUnique({ where: { email } });
+    if (existingUser) {
+      throw new Error("User already exists");
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const created = await prisma.user.create({
+      data: {
+        email,
+        name,
+        password: hashedPassword,
+      },
+    });
+
+    return {
+      id: created.id,
+      email: created.email,
+      name: created.name ?? "",
+      password: created.password ?? "",
+      createdAt: created.createdAt.toISOString(),
+      favorites: [],
+    };
+  }
+
+  if (!ALLOW_FILE_FALLBACK) {
+    throw new Error("Database is required in production");
+  }
   const data = readUsersFile();
   
   const existingUser = data.users.find((u) => u.email === email);
@@ -99,4 +195,3 @@ export async function verifyPassword(
 ): Promise<boolean> {
   return bcrypt.compare(password, user.password);
 }
-
