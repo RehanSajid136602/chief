@@ -1,15 +1,33 @@
-import { Suspense } from "react";
+import nextDynamic from "next/dynamic";
 import { getAllRecipes } from "@/lib/recipes";
 import { Hero } from "@/components/home/Hero";
-import { RecipeListClient } from "@/components/home/RecipeListClient";
 import { RecipeGridSkeleton } from "@/components/recipe/RecipeGrid";
 import { Container } from "@/components/ui/Container";
 import { Navbar } from "@/components/ui/Navbar";
-import { Reveal } from "@/components/ui/Reveal";
 import { auth } from "@/auth";
 import { findUserByEmail } from "@/lib/users";
 import { listPantryItemsByEmail } from "@/lib/pantry";
 import { normalizeIngredient } from "@/lib/recipes";
+
+const RecipeListClient = nextDynamic(
+  () => import("@/components/home/RecipeListClient").then((mod) => mod.RecipeListClient),
+  {
+    ssr: false,
+    loading: () => (
+      <div id="recipes" className="space-y-6">
+        <div className="surface-subtle rounded-2xl p-4 md:p-5">
+          <p className="text-xs uppercase tracking-[0.12em] font-semibold text-zinc-500 mb-2">
+            Loading Recipes
+          </p>
+          <p className="text-sm text-zinc-400">
+            Preparing filters and search tools for the recipe library.
+          </p>
+        </div>
+        <RecipeGridSkeleton count={6} />
+      </div>
+    ),
+  }
+);
 
 export const dynamic = "force-dynamic";
 
@@ -50,27 +68,23 @@ export default async function Home() {
       <main className="min-h-screen pt-16">
         <Hero />
         <Container className="py-10 md:py-12">
-          <Reveal y={14}>
-            <div className="mb-8 md:mb-10 flex flex-col gap-2">
-              <p className="text-xs uppercase tracking-[0.12em] text-zinc-500 font-semibold">
-                Recipe Library
-              </p>
-              <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-zinc-100">
-                Browse recipes by time, calories, and cravings
-              </h2>
-              <p className="max-w-2xl text-sm md:text-base leading-6 text-zinc-400">
-                Start broad, then narrow quickly with tags and filters. The interface is optimized for scanning, not endless scrolling.
-              </p>
-            </div>
-          </Reveal>
-          <Suspense fallback={<RecipeGridSkeleton count={6} />}>
-            <RecipeListClient 
-              recipes={recipes} 
-              allTags={allTags} 
-              favorites={favorites}
-              pantryMatchCountsBySlug={pantryMatchCountsBySlug}
-            />
-          </Suspense>
+          <div className="mb-8 md:mb-10 flex flex-col gap-2 reveal-on-mount">
+            <p className="text-xs uppercase tracking-[0.12em] text-zinc-500 font-semibold">
+              Recipe Library
+            </p>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-zinc-100">
+              Browse recipes by time, calories, and cravings
+            </h2>
+            <p className="max-w-2xl text-sm md:text-base leading-6 text-zinc-400">
+              Start broad, then narrow quickly with tags and filters. The interface is optimized for scanning, not endless scrolling.
+            </p>
+          </div>
+          <RecipeListClient
+            recipes={recipes}
+            allTags={allTags}
+            favorites={favorites}
+            pantryMatchCountsBySlug={pantryMatchCountsBySlug}
+          />
         </Container>
       </main>
     </>
