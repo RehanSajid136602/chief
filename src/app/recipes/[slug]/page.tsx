@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { getAllRecipes, getRecipeBySlug } from "@/lib/recipes";
 import { ImageGallery } from "@/components/recipe/ImageGallery";
-import { VideoEmbed } from "@/components/recipe/VideoEmbed";
+import { getYouTubeVideoId, VideoEmbed } from "@/components/recipe/VideoEmbed";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/Container";
 import { Navbar } from "@/components/ui/Navbar";
@@ -61,6 +61,7 @@ export default async function RecipePage({ params }: PageProps) {
     const user = await findUserByEmail(session.user.email);
     isFavorite = user?.favorites?.includes(slug) || false;
   }
+  const recipeVideoId = getYouTubeVideoId(recipe.youtubeVideoUrl);
 
   return (
     <>
@@ -172,7 +173,7 @@ export default async function RecipePage({ params }: PageProps) {
                 </section>
               </div>
               
-              {recipe.youtubeVideoUrl && (
+              {recipeVideoId && (
                 <section className="reveal-on-mount" style={{ ["--reveal-delay" as string]: "90ms" }}>
                   <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-3">
                     <span className="w-6 h-px bg-white/20 rounded-full" />

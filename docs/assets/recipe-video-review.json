@@ -1,0 +1,90 @@
+{
+  "reviewedBy": "Codex + manual curation",
+  "reviewDate": "2026-02-23",
+  "entries": {
+    "spaghetti-carbonara": {
+      "status": "approved",
+      "videoTitle": "Simple Pastas: Spaghetti Carbonara",
+      "channelName": "Lidia Bastianich",
+      "sourcePage": "https://www.youtube.com/watch?v=2yTBEqIBVyk",
+      "notes": "Direct carbonara tutorial from an established cooking presenter; dish matches recipe category."
+    },
+    "chicken-tikka-masala": {
+      "status": "approved",
+      "videoTitle": "Chicken Tikka Masala",
+      "channelName": "Cafe Delites",
+      "sourcePage": "https://www.youtube.com/watch?v=t1MNFVKTaqE",
+      "notes": "Recipe-specific chicken tikka masala tutorial; relevant curry preparation."
+    },
+    "beef-tacos": {
+      "status": "approved",
+      "videoTitle": "Most Delicious Beef Tacos",
+      "channelName": "Cooking With Claudia",
+      "sourcePage": "https://www.youtube.com/watch?v=hq6NEcrN0Es",
+      "notes": "Beef taco tutorial; acceptable style variation under flexible tutorial policy."
+    },
+    "mushroom-risotto": {
+      "status": "approved",
+      "videoTitle": "Gourmet Mushroom Risotto At Home",
+      "channelName": "Nick's Kitchen",
+      "sourcePage": "https://www.youtube.com/watch?v=GJ_lGFVyecM",
+      "notes": "Mushroom risotto tutorial and plating; aligns with recipe dish."
+    },
+    "thai-green-curry": {
+      "status": "approved",
+      "videoTitle": "Thai Green Curry Recipe",
+      "channelName": "Archana's Kitchen",
+      "sourcePage": "https://www.archanaskitchen.com/thai-green-curry-with-chicken-and-brinjals",
+      "notes": "Thai green curry tutorial linked from recipe page thumbnail; same dish family."
+    },
+    "classic-cheeseburger": {
+      "status": "approved",
+      "videoTitle": "The Best Homemade Cheeseburger Recipe",
+      "channelName": "Old School Soul Food",
+      "sourcePage": "https://www.youtube.com/watch?v=_MCak5oIgtI",
+      "notes": "Classic cheeseburger preparation tutorial; relevant burger assembly and cooking steps."
+    },
+    "shrimp-garlic-pasta": {
+      "status": "approved",
+      "videoTitle": "GARLIC Butter Shrimp Pasta Recipe",
+      "channelName": "Delicious Recipes",
+      "sourcePage": "https://www.youtube.com/watch?v=Oo_x0Qc6KGs",
+      "notes": "Garlic shrimp pasta tutorial with matching dish and ingredients."
+    },
+    "vegetable-stir-fry": {
+      "status": "approved",
+      "videoTitle": "Vegetable Stir Fry",
+      "channelName": "Cooking with Coit",
+      "sourcePage": "https://www.youtube.com/watch?v=frFZS7x1nfs",
+      "notes": "Vegetable stir-fry walkthrough; matches recipe intent despite ingredient variations."
+    },
+    "chicken-parmesan": {
+      "status": "approved",
+      "videoTitle": "Chicken Parmesan",
+      "channelName": "Nick's Kitchen",
+      "sourcePage": "https://nickskitchen.net/recipes/chicken-parmesan/",
+      "notes": "Chicken parmesan tutorial linked from recipe page thumbnail; same dish and method style."
+    },
+    "greek-salad": {
+      "status": "approved",
+      "videoTitle": "How to Make the BEST Classic Greek Salad",
+      "channelName": "Natasha's Kitchen",
+      "sourcePage": "https://www.youtube.com/watch?v=36QOkwvNzts",
+      "notes": "Classic Greek salad tutorial; clearly matches recipe category."
+    },
+    "beef-bolognese": {
+      "status": "approved",
+      "videoTitle": "Spaghetti Bolognese",
+      "channelName": "Nick's Kitchen",
+      "sourcePage": "https://nickskitchen.net/recipes/spaghetti-bolognese/",
+      "notes": "Bolognese tutorial linked from recipe page thumbnail; same dish and sauce style."
+    },
+    "pad-thai": {
+      "status": "approved",
+      "videoTitle": "How to make pad thai rice noodles",
+      "channelName": "MysimpleC",
+      "sourcePage": "https://www.youtube.com/watch?v=rX47AFab1D4",
+      "notes": "Pad Thai noodle tutorial; relevant dish and preparation."
+    }
+  }
+}

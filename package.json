@@ -9,6 +9,7 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "validate:images": "node scripts/validate-recipe-images.mjs",
+    "validate:videos": "node scripts/validate-recipe-videos.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test"
