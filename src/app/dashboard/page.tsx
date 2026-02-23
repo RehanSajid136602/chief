@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import { findUserByEmail } from "@/lib/users";
+import { ensureUserByEmail } from "@/lib/users";
 import { getRecipeBySlug } from "@/lib/recipes";
 import { RecipeGrid } from "@/components/recipe/RecipeGrid";
 import { Container } from "@/components/ui/Container";
@@ -24,7 +24,7 @@ export default async function DashboardPage() {
     redirect("/auth/login");
   }
 
-  const user = await findUserByEmail(session.user.email);
+  const user = await ensureUserByEmail(session.user.email, session.user.name);
   if (!user) {
     redirect("/auth/login");
   }

@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
-import { findUserByEmail } from "@/lib/users";
+import { ensureUserByEmail, findUserByEmail } from "@/lib/users";
 import bcrypt from "bcryptjs";
 
 import { authConfig } from "./auth.config";
@@ -47,4 +47,16 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
+  callbacks: {
+    ...authConfig.callbacks,
+    async signIn(params) {
+      if (!params.user.email) return false;
+
+      // Ensure OAuth users have a local profile record before hitting dashboard routes.
+      const ensuredUser = await ensureUserByEmail(params.user.email, params.user.name);
+      if (!ensuredUser) return false;
+
+      return true;
+    },
+  },
 });

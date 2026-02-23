@@ -1,7 +1,14 @@
+import { auth } from "@/auth";
 import { AuthForm } from "@/components/auth/AuthForm";
 import { Reveal } from "@/components/ui/Reveal";
+import { redirect } from "next/navigation";
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const session = await auth();
+  if (session?.user?.email) {
+    redirect("/dashboard");
+  }
+
   return (
     <div className="w-full">
       <Reveal y={12}>

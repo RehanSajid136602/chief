@@ -1,7 +1,13 @@
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import type { ChefProfile } from "@/lib/types/chef";
 
 export function ChefCard({ chef }: { chef: ChefProfile }) {
+  const [imageFailed, setImageFailed] = useState(false);
+
   const initials = chef.name
     .split(" ")
     .slice(0, 2)
@@ -12,8 +18,23 @@ export function ChefCard({ chef }: { chef: ChefProfile }) {
   return (
     <article className="surface-panel rounded-2xl p-5 md:p-6 h-full flex flex-col gap-4">
       <div className="flex items-start gap-4">
-        <div className="h-14 w-14 shrink-0 rounded-2xl bg-gradient-to-br from-emerald-400/20 via-emerald-300/10 to-cyan-400/10 border border-emerald-300/20 flex items-center justify-center text-emerald-200 font-semibold">
-          {initials}
+        <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl border border-emerald-300/20 bg-gradient-to-br from-emerald-400/20 via-emerald-300/10 to-cyan-400/10">
+          {!imageFailed ? (
+            <Image
+              src={chef.image.src}
+              alt={chef.image.alt}
+              fill
+              sizes="64px"
+              className="object-cover"
+              onError={() => setImageFailed(true)}
+            />
+          ) : null}
+          <div
+            className="absolute inset-0 flex items-center justify-center text-emerald-200 font-semibold"
+            aria-hidden={!imageFailed}
+          >
+            {imageFailed ? initials : null}
+          </div>
         </div>
         <div className="space-y-1 min-w-0">
           <p className="text-[10px] uppercase tracking-[0.1em] font-semibold text-zinc-500">
@@ -62,6 +83,14 @@ export function ChefCard({ chef }: { chef: ChefProfile }) {
             Instagram
           </Link>
         ) : null}
+        <Link
+          href={chef.image.sourcePage}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center rounded-full border border-emerald-300/15 bg-emerald-400/5 px-3 py-1.5 text-xs font-medium text-emerald-200 hover:text-emerald-100 hover:bg-emerald-400/10 transition-colors"
+        >
+          Image Source
+        </Link>
       </div>
     </article>
   );

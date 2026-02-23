@@ -78,6 +78,57 @@ export async function findUserByEmail(email: string): Promise<User | null> {
   return user;
 }
 
+export async function ensureUserByEmail(email: string, name?: string | null): Promise<User | null> {
+  const existing = await findUserByEmail(email);
+  if (existing) return existing;
+
+  if (SHOULD_USE_PRISMA) {
+    try {
+      const created = await prisma.user.create({
+        data: {
+          email,
+          name: name ?? "",
+          region: null,
+          password: null,
+        },
+      });
+
+      return {
+        id: created.id,
+        email: created.email,
+        name: created.name ?? "",
+        region: created.region ?? null,
+        password: created.password ?? "",
+        createdAt: created.createdAt.toISOString(),
+        favorites: [],
+      };
+    } catch (error) {
+      console.error("Error ensuring user in Prisma:", error);
+      return findUserByEmail(email);
+    }
+  }
+
+  if (!ALLOW_FILE_FALLBACK) return null;
+
+  const data = readUsersFile();
+  const duplicate = data.users.find((u) => u.email === email);
+  if (duplicate) return duplicate;
+
+  const newUser: User = {
+    id: crypto.randomUUID(),
+    email,
+    name: name ?? "",
+    region: null,
+    password: "",
+    createdAt: new Date().toISOString(),
+    favorites: [],
+  };
+
+  data.users.push(newUser);
+  writeUsersFile(data);
+  return newUser;
+}
+
 export async function updateUser(
   email: string,
   updates: Partial<User>
