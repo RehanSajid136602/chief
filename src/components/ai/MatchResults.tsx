@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { MatchResult } from "@/lib/types";
 import { RecipeCard } from "@/components/recipe/RecipeCard";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -5,9 +6,10 @@ import { Reveal } from "@/components/ui/Reveal";
 
 interface MatchResultsProps {
   results: MatchResult[];
+  favorites?: string[];
 }
 
-export function MatchResults({ results }: MatchResultsProps) {
+export function MatchResults({ results, favorites = [] }: MatchResultsProps) {
   if (results.length === 0) {
     return (
       <EmptyState
@@ -39,13 +41,16 @@ export function MatchResults({ results }: MatchResultsProps) {
               recipe={result.recipe}
               matchPercent={result.matchPercent}
               showMatchBadge
+              isFavorite={favorites.includes(result.recipe.slug)}
               enableReveal={index < 9}
               revealIndex={index}
             />
             {result.missingIngredients.length > 0 && (
               <div
                 className="mt-2 rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-2 text-xs leading-5 text-zinc-400 reveal-on-mount"
-                style={{ ["--reveal-delay" as string]: `${Math.min(index, 8) * 40 + 80}ms` }}
+                style={
+                  { ["--reveal-delay" as string]: `${Math.min(index, 8) * 40 + 80}ms` } as CSSProperties
+                }
               >
                 <span className="font-medium text-zinc-200">Missing:</span>{" "}
                 {result.missingIngredients.join(", ")}

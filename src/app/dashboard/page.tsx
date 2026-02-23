@@ -193,7 +193,7 @@ export default async function DashboardPage() {
                 </Link>
               </section>
               <div className="reveal-on-mount" style={{ ["--reveal-delay" as string]: "200ms" }}>
-                <DashboardClient user={{ email: user.email, name: user.name }} />
+                <DashboardClient user={{ email: user.email, name: user.name, region: user.region ?? null }} />
               </div>
             </Reveal>
           </div>

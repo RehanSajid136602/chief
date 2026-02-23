@@ -34,6 +34,7 @@ export function Navbar({ session }: NavbarProps) {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/ai", label: "AI Matcher" },
+    { href: "/chefs", label: "Chefs" },
     ...(session ? [{ href: "/dashboard", label: "Dashboard" }] : []),
   ];
 

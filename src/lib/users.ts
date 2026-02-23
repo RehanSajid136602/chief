@@ -11,6 +11,7 @@ export interface User {
   id: string;
   email: string;
   name: string;
+  region?: string | null;
   password: string;
   createdAt: string;
   favorites?: string[];
@@ -54,6 +55,7 @@ export async function findUserByEmail(email: string): Promise<User | null> {
         id: user.id,
         email: user.email,
         name: user.name ?? "",
+        region: user.region ?? null,
         password: user.password ?? "",
         createdAt: user.createdAt.toISOString(),
         favorites: user.favorites.map((f) => f.recipeSlug),
@@ -69,6 +71,9 @@ export async function findUserByEmail(email: string): Promise<User | null> {
   const user = data.users.find((u) => u.email === email) || null;
   if (user && !user.favorites) {
     user.favorites = [];
+  }
+  if (user && user.region === undefined) {
+    user.region = null;
   }
   return user;
 }
@@ -91,6 +96,8 @@ export async function updateUser(
           where: { email },
           data: {
             name: updates.name ?? existing.name,
+            region:
+              updates.region === undefined ? existing.region : updates.region,
             password: updates.password ?? existing.password,
           },
         });
@@ -126,6 +133,10 @@ export async function updateUser(
     ...data.users[userIndex],
     ...updates,
     favorites: updates.favorites || data.users[userIndex].favorites || [],
+    region:
+      updates.region === undefined
+        ? (data.users[userIndex].region ?? null)
+        : updates.region,
   };
 
   writeUsersFile(data);
@@ -148,6 +159,7 @@ export async function createUser(
       data: {
         email,
         name,
+        region: null,
         password: hashedPassword,
       },
     });
@@ -156,6 +168,7 @@ export async function createUser(
       id: created.id,
       email: created.email,
       name: created.name ?? "",
+      region: created.region ?? null,
       password: created.password ?? "",
       createdAt: created.createdAt.toISOString(),
       favorites: [],
@@ -178,6 +191,7 @@ export async function createUser(
     id: crypto.randomUUID(),
     email,
     name,
+    region: null,
     password: hashedPassword,
     createdAt: new Date().toISOString(),
     favorites: [],

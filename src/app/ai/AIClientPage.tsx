@@ -8,7 +8,7 @@ import { MatchResults } from "@/components/ai/MatchResults";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function AIClientPage() {
+export function AIClientPage({ favorites }: { favorites: string[] }) {
   const [results, setResults] = useState<MatchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
@@ -68,7 +68,9 @@ export function AIClientPage() {
                 </p>
               </div>
             )}
-            {(hasSearched || results.length > 0) && <MatchResults results={results} />}
+            {(hasSearched || results.length > 0) && (
+              <MatchResults results={results} favorites={favorites} />
+            )}
             </div>
           </Reveal>
         </div>
